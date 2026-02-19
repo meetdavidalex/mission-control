@@ -517,10 +517,10 @@
                                         <span>⏱️ 8-12 min</span>
                                         <span>📝 2,475 words</span>
                                     </div>
-                                    <h2 class="priority-title">Claude Opus 4.6 vs Sonnet 4.6: The Real Difference for Vibe Coding</h2>
-                                    <p class="priority-desc">Complete comparison with honest verdict, pricing breakdown, and which model actually wins for different use cases.</p>
+                                    <h2 class="priority-title">The Tailwind Paradox: When Success Kills Your Business</h2>
+                                    <p class="priority-desc">How a tool with 75M downloads laid off 75% of their team — and what AI builders need to learn from it.</p>
                                     <div style="display: flex; gap: 0.5rem;">
-                                        <a href="https://www.notion.so/Claude-Opus-4-6-vs-Sonnet-4-6-Which-Actually-Wins-for-Vibe-Coding-30c9f11a16c1813db428e881bd24ec27" class="btn btn-primary" target="_blank">📄 View Script</a>
+                                        <a href="https://www.notion.so/The-Tailwind-Paradox-When-Success-Kills-Your-Business-30c9f11a16c181a1bc53f2cee75abc2f" class="btn btn-primary" target="_blank">📄 View Script</a>
                                         <a href="tg://resolve?domain=maverickalex_bot" class="btn btn-secondary">✓ Mark Recorded</a>
                                     </div>
                                 </div>
@@ -810,8 +810,11 @@
             // Show selected page
             document.getElementById(pageId).classList.add('active');
             
-            // Add active to clicked nav item
-            event.target.classList.add('active');
+            // Add active to clicked nav item (find the nav-item parent)
+            const clickedItem = event.target.closest('.nav-item');
+            if (clickedItem) {
+                clickedItem.classList.add('active');
+            }
             
             // Update page title
             const titles = {
