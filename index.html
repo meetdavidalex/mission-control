@@ -10,11 +10,9 @@
             --background: oklch(0.9818 0.0054 95.0986);
             --foreground: oklch(0.3438 0.0269 95.7226);
             --card: oklch(0.9818 0.0054 95.0986);
-            --card-foreground: oklch(0.1908 0.0020 106.5859);
             --primary: oklch(0.6171 0.1375 39.0427);
             --primary-foreground: oklch(1.0000 0 0);
             --secondary: oklch(0.9245 0.0138 92.9892);
-            --secondary-foreground: oklch(0.4334 0.0177 98.6048);
             --muted: oklch(0.9341 0.0153 90.2390);
             --muted-foreground: oklch(0.6059 0.0075 97.4233);
             --accent: oklch(0.9245 0.0138 92.9892);
@@ -47,97 +45,165 @@
             font-size: 14px;
         }
         
-        /* Mission Statement Banner */
+        /* Layout */
+        .app {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: var(--card);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .brand-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--primary);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        
+        .brand-text h1 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .brand-text p {
+            font-size: 0.75rem;
+            color: var(--muted-foreground);
+        }
+        
+        .nav-section {
+            padding: 1rem 0.75rem;
+        }
+        
+        .nav-label {
+            padding: 0 0.75rem;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--muted-foreground);
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.625rem 0.75rem;
+            border-radius: var(--radius);
+            color: var(--foreground);
+            text-decoration: none;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background: var(--accent);
+        }
+        
+        .nav-item.active {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .nav-icon {
+            width: 1.25rem;
+            text-align: center;
+        }
+        
+        /* Main Content */
+        .main {
+            flex: 1;
+            margin-left: 260px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Mission Banner */
         .mission-banner {
             background: var(--primary);
             color: var(--primary-foreground);
             padding: 0.75rem 1.5rem;
             text-align: center;
-            font-size: 0.875rem;
+            font-size: 0.8125rem;
             font-weight: 500;
         }
         
-        /* Header */
-        .header {
-            border-bottom: 1px solid var(--border);
-            background: var(--card);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-        
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
+        /* Top Bar */
+        .top-bar {
             height: 3.5rem;
+            border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 0 1.5rem;
+            background: var(--card);
         }
         
-        .brand { display: flex; align-items: center; gap: 0.75rem; }
-        .brand-icon {
-            width: 2rem; height: 2rem;
-            background: var(--primary);
-            border-radius: var(--radius);
-            display: flex; align-items: center; justify-content: center;
+        .page-title {
             font-size: 1rem;
+            font-weight: 600;
         }
-        .brand-text h1 { font-size: 0.9375rem; font-weight: 600; }
-        .brand-text p { font-size: 0.75rem; color: var(--muted-foreground); }
         
-        .header-actions { display: flex; align-items: center; gap: 0.5rem; }
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .time-display {
+            font-size: 0.8125rem;
+            color: var(--muted-foreground);
+        }
         
         .btn-icon {
-            width: 2rem; height: 2rem;
-            display: flex; align-items: center; justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: transparent;
             border: 1px solid var(--border);
             border-radius: var(--radius);
             color: var(--muted-foreground);
             cursor: pointer;
-            font-size: 0.875rem;
         }
         
-        .btn-icon:hover { background: var(--accent); }
-        
-        /* Tool Navigation */
-        .tool-nav {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1rem 1.5rem;
-            display: flex;
-            gap: 0.5rem;
-            overflow-x: auto;
-            border-bottom: 1px solid var(--border);
+        .btn-icon:hover {
+            background: var(--accent);
         }
         
-        .tool-btn {
-            padding: 0.5rem 1rem;
-            background: var(--secondary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            color: var(--secondary-foreground);
-            font-size: 0.8125rem;
-            font-weight: 500;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.15s;
+        /* Content Area */
+        .content {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
         }
-        
-        .tool-btn:hover, .tool-btn.active {
-            background: var(--primary);
-            color: var(--primary-foreground);
-            border-color: var(--primary);
-        }
-        
-        /* Main Content */
-        .main { max-width: 1400px; margin: 0 auto; padding: 1.5rem; }
-        
-        /* Tool Panels */
-        .tool-panel { display: none; }
-        .tool-panel.active { display: block; }
         
         /* Cards */
         .card {
@@ -155,18 +221,115 @@
             align-items: center;
         }
         
-        .card-title { font-size: 0.875rem; font-weight: 600; }
-        .card-body { padding: 1.25rem; }
+        .card-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .card-body {
+            padding: 1.25rem;
+        }
         
         /* Grid */
-        .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1rem;
+        }
+        
         .col-12 { grid-column: span 12; }
+        .col-8 { grid-column: span 8; }
         .col-6 { grid-column: span 6; }
         .col-4 { grid-column: span 4; }
         .col-3 { grid-column: span 3; }
         
-        @media (max-width: 768px) {
-            .col-6, .col-4, .col-3 { grid-column: span 12; }
+        @media (max-width: 1024px) {
+            .col-8, .col-6, .col-4, .col-3 { grid-column: span 12; }
+        }
+        
+        /* Priority Card */
+        .priority-card {
+            background: var(--primary);
+            color: var(--primary-foreground);
+            border: none;
+        }
+        
+        .priority-card .card-header {
+            border-bottom-color: rgba(0,0,0,0.1);
+        }
+        
+        .priority-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8125rem;
+            opacity: 0.9;
+            margin-bottom: 0.75rem;
+        }
+        
+        .priority-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .priority-desc {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.15s;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: var(--primary-foreground);
+            color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border-color: rgba(0,0,0,0.2);
+            color: var(--primary-foreground);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border-color: var(--border);
+            color: var(--foreground);
+        }
+        
+        .btn-outline:hover {
+            background: var(--accent);
+        }
+        
+        /* Stats */
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--muted-foreground);
+            margin-top: 0.25rem;
         }
         
         /* Task List */
@@ -182,57 +345,30 @@
         }
         
         .task-status {
-            width: 0.5rem; height: 0.5rem;
+            width: 0.5rem;
+            height: 0.5rem;
             border-radius: 50%;
         }
+        
         .task-status.pending { background: var(--muted-foreground); }
         .task-status.running { background: var(--primary); animation: pulse 1s infinite; }
         .task-status.complete { background: #22c55e; }
         
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
         
         .task-name { flex: 1; font-size: 0.8125rem; }
         .task-time { font-size: 0.75rem; color: var(--muted-foreground); }
         
-        /* Calendar */
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 0.5rem;
-        }
-        
-        .calendar-day {
-            aspect-ratio: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: var(--secondary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            font-size: 0.75rem;
-        }
-        
-        .calendar-day.has-task { border-color: var(--primary); }
-        .calendar-day-number { font-weight: 600; }
-        .calendar-day-task { font-size: 0.625rem; color: var(--primary); }
-        
-        /* Document List */
-        .doc-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem;
-            border-bottom: 1px solid var(--border);
-            cursor: pointer;
-        }
-        .doc-item:hover { background: var(--accent); }
-        .doc-icon { font-size: 1.25rem; }
-        .doc-info { flex: 1; }
-        .doc-name { font-size: 0.8125rem; font-weight: 500; }
-        .doc-meta { font-size: 0.75rem; color: var(--muted-foreground); }
-        
         /* Content Cards */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        
         .content-card {
             background: var(--secondary);
             border: 1px solid var(--border);
@@ -241,371 +377,455 @@
             cursor: pointer;
             transition: all 0.15s;
         }
-        .content-card:hover { border-color: var(--ring); }
-        .content-card h4 { font-size: 0.875rem; margin-bottom: 0.25rem; }
-        .content-card p { font-size: 0.75rem; color: var(--muted-foreground); }
+        
+        .content-card:hover {
+            border-color: var(--ring);
+        }
+        
+        .content-card h4 {
+            font-size: 0.9375rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .content-card p {
+            font-size: 0.8125rem;
+            color: var(--muted-foreground);
+        }
+        
         .content-card .meta {
             display: flex;
             gap: 0.5rem;
-            margin-top: 0.5rem;
-            font-size: 0.6875rem;
+            margin-top: 0.75rem;
         }
+        
         .badge {
-            padding: 0.125rem 0.375rem;
+            padding: 0.125rem 0.5rem;
             border-radius: 9999px;
             font-size: 0.6875rem;
             background: var(--accent);
         }
+        
+        /* Pages */
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
-    <!-- Mission Statement Banner -->
-    <div class="mission-banner">
-        🎯 MISSION: Autonomous organization of AI agents producing value 24/7 for David Alex
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <div class="brand-icon">🦞</div>
+                    <div class="brand-text">
+                        <h1>Maverick</h1>
+                        <p>Mission Control</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="nav-section">
+                <div class="nav-label">Overview</div>
+                <a class="nav-item active" onclick="showPage('dashboard')">
+                    <span class="nav-icon">📊</span>
+                    Dashboard
+                </a>
+                <a class="nav-item" onclick="showPage('scripts')">
+                    <span class="nav-icon">📝</span>
+                    Scripts
+                </a>
+                <a class="nav-item" onclick="showPage('trends')">
+                    <span class="nav-icon">🔥</span>
+                    Trends
+                </a>
+                <a class="nav-item" onclick="showPage('calendar')">
+                    <span class="nav-icon">📅</span>
+                    Calendar
+                </a>
+            </nav>
+            
+            <nav class="nav-section">
+                <div class="nav-label">Tools</div>
+                <a class="nav-item" onclick="showPage('tasks')">
+                    <span class="nav-icon">✅</span>
+                    Tasks
+                </a>
+                <a class="nav-item" onclick="showPage('agents')">
+                    <span class="nav-icon">🤖</span>
+                    Agents
+                </a>
+                <a class="nav-item" onclick="showPage('docs')">
+                    <span class="nav-icon">📄</span>
+                    Documents
+                </a>
+                <a class="nav-item" onclick="showPage('analytics')">
+                    <span class="nav-icon">📈</span>
+                    Analytics
+                </a>
+            </nav>
+            
+            <nav class="nav-section">
+                <div class="nav-label">Settings</div>
+                <a class="nav-item" onclick="showPage('settings')">
+                    <span class="nav-icon">⚙️</span>
+                    Settings
+                </a>
+                <a class="nav-item" href="https://t.me/maverickalex_bot">
+                    <span class="nav-icon">💬</span>
+                    Telegram
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main -->
+        <div class="main">
+            <!-- Mission Banner -->
+            <div class="mission-banner">
+                🎯 MISSION: Autonomous AI agents producing value 24/7 • Target: $80K-120K/month • 3 videos/day
+            </div>
+            
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="page-title">Dashboard</div>
+                <div class="top-actions">
+                    <span class="time-display">🕐 07:22 AM PST</span>
+                    <button class="btn-icon" onclick="toggleTheme()">🌙</button>
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="content">
+                
+                <!-- DASHBOARD PAGE -->
+                <div id="dashboard" class="page active">
+                    <div class="grid">
+                        <!-- Priority -->
+                        <div class="col-12">
+                            <div class="card priority-card">
+                                <div class="card-header">
+                                    <span class="card-title">🎯 Today's Priority</span>
+                                    <span style="font-size: 0.75rem; opacity: 0.8;">Ready to Record</span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="priority-meta">
+                                        <span>📺 David Alex</span>
+                                        <span>⏱️ 8-12 min</span>
+                                        <span>📝 2,475 words</span>
+                                    </div>
+                                    <h2 class="priority-title">Claude Opus 4.6 vs Sonnet 4.6: The Real Difference for Vibe Coding</h2>
+                                    <p class="priority-desc">Complete comparison with honest verdict, pricing breakdown, and which model actually wins for different use cases.</p>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <a href="https://www.notion.so/Claude-Opus-4-6-vs-Sonnet-4-6-Which-Actually-Wins-for-Vibe-Coding-30c9f11a16c1813db428e881bd24ec27" class="btn btn-primary" target="_blank">📄 View Script</a>
+                                        <a href="tg://resolve?domain=maverickalex_bot" class="btn btn-secondary">✓ Mark Recorded</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stats -->
+                        <div class="col-3">
+                            <div class="card stat-card">
+                                <div class="stat-value">3</div>
+                                <div class="stat-label">Scripts Ready</div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card stat-card">
+                                <div class="stat-value">5</div>
+                                <div class="stat-label">Trends Today</div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card stat-card">
+                                <div class="stat-value">847</div>
+                                <div class="stat-label">Total Scripts</div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card stat-card">
+                                <div class="stat-value">$28K</div>
+                                <div class="stat-label">This Month</div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="card-title">⚡ Recent Activity</span>
+                                    <span style="font-size: 0.75rem; color: var(--muted-foreground);">Updated 07:22 AM PST</span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="task-item">
+                                        <div class="task-status complete"></div>
+                                        <div class="task-name">Research Agent found 5 trending threads</div>
+                                        <div class="task-time">07:15 AM</div>
+                                    </div>
+                                    
+                                    <div class="task-item">
+                                        <div class="task-status complete"></div>
+                                        <div class="task-name">Script Agent completed Claude comparison</div>
+                                        <div class="task-time">07:10 AM</div>
+                                    </div>
+                                    
+                                    <div class="task-item">
+                                        <div class="task-status running"></div>
+                                        <div class="task-name">Social Agent drafting companion posts</div>
+                                        <div class="task-time">Now</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="card-title">⚡ Quick Actions</span>
+                                </div>
+                                <div class="card-body">
+                                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem;">
+                                        <a href="tg://resolve?domain=maverickalex_bot" class="btn btn-outline" style="justify-content: center;">🔍 Check Threads</a>
+                                        <a href="tg://resolve?domain=maverickalex_bot" class="btn btn-outline" style="justify-content: center;">📝 New Script</a>
+                                        <a href="tg://resolve?domain=maverickalex_bot" class="btn btn-outline" style="justify-content: center;">📚 View Archive</a>
+                                        <a href="tg://resolve?domain=maverickalex_bot" class="btn btn-outline" style="justify-content: center;">⚙️ Settings</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SCRIPTS PAGE -->
+                <div id="scripts" class="page">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">📝 All Scripts</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="content-grid">
+                                <div class="content-card">
+                                    <h4>Claude Opus 4.6 vs Sonnet 4.6</h4>
+                                    <p>Complete comparison with honest verdict, pricing, limitations</p>
+                                    <div class="meta">
+                                        <span class="badge">Ready</span>
+                                        <span class="badge">David Alex</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="content-card">
+                                    <h4>FreshBooks Review 2025</h4>
+                                    <p>Full walkthrough with sponsor integration</p>
+                                    <div class="meta">
+                                        <span class="badge">Recorded</span>
+                                        <span class="badge">David Alex</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="content-card">
+                                    <h4>Lovable vs Bolt.new</h4>
+                                    <p>Vibe coding tool comparison</p>
+                                    <div class="meta">
+                                        <span class="badge">Research</span>
+                                        <span class="badge">Vibes Academy</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TRENDS PAGE -->
+                <div id="trends" class="page">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">🔥 Threads Trending</span>
+                            <span style="font-size: 0.75rem; color: var(--muted-foreground);">Updated 07:22 AM PST</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="task-item">
+                                <div style="font-size: 1.25rem;">📊</div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">Tailwind Irony</div>
+                                    <div style="font-size: 0.75rem; color: var(--muted-foreground);">75% layoffs despite 75M downloads</div>
+                                </div>
+                                <div style="font-size: 0.75rem; color: var(--primary); font-weight: 600;">372 likes</div>
+                            </div>
+                            
+                            <div class="task-item">
+                                <div style="font-size: 1.25rem;">🚀</div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">SoftGen $1M Exit</div>
+                                    <div style="font-size: 0.75rem; color: var(--muted-foreground);">20yo founder built before hype</div>
+                                </div>
+                                <div style="font-size: 0.75rem; color: var(--primary); font-weight: 600;">500 likes</div>
+                            </div>
+
+                            <div class="task-item">
+                                <div style="font-size: 1.25rem;">🌙</div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">The 2 AM Test</div>
+                                    <div style="font-size: 0.75rem; color: var(--muted-foreground);">"AI won't replace devs. Can you fix it at 2 AM?"</div>
+                                </div>
+                                <div style="font-size: 0.75rem; color: var(--primary); font-weight: 600;">Viral</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other pages placeholder -->
+                <div id="calendar" class="page">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">📅 Content Calendar</span>
+                        </div>
+                        <div class="card-body">
+                            <p style="color: var(--muted-foreground);">Calendar view coming soon...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tasks" class="page">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">✅ Autonomous Tasks</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="task-item">
+                                <div class="task-status complete"></div>
+                                <div class="task-name">6:00 AM — Research Agent: Check overnight trends</div>
+                                <div class="task-time">Complete</div>
+                            </div>
+                            
+                            <div class="task-item">
+                                <div class="task-status complete"></div>
+                                <div class="task-name">8:00 AM — Script Agent: Write Script #1</div>
+                                <div class="task-time">Complete</div>
+                            </div>
+                            
+                            <div class="task-item">
+                                <div class="task-status pending"></div>
+                                <div class="task-name">10:00 AM — Script Agent: Write Script #2</div>
+                                <div class="task-time">Scheduled</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="agents" class="page">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">🤖 Agent Status</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="task-item">
+                                <div class="task-status complete"></div>
+                                <div class="task-name">🔍 Research Agent</div>
+                                <div class="task-time">Active</div>
+                            </div>
+                            
+                            <div class="task-item">
+                                <div class="task-status complete"></div>
+                                <div class="task-name">📝 Script Agent</div>
+                                <div class="task-time">Active</div>
+                            </div>
+                            
+                            <div class="task-item">
+                                <div class="task-status complete"></div>
+                                <div class="task-name">🎣 Hook Agent</div>
+                                <div class="task-time">Active</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="docs" class="page">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">📄 Documents</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="task-item">
+                                <div style="font-size: 1.25rem;">📋</div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">MISSION_STATEMENT.md</div>
+                                    <div style="font-size: 0.75rem; color: var(--muted-foreground);">Updated today</div>
+                                </div>
+                            </div>
+                            
+                            <div class="task-item">
+                                <div style="font-size: 1.25rem;">🧠</div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">BRAIN_DUMP.md</div>
+                                    <div style="font-size: 0.75rem; color: var(--muted-foreground);">Updated today</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="analytics" class="page">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">📈 Analytics</span>
+                        </div>
+                        <div class="card-body">
+                            <p style="color: var(--muted-foreground);">Analytics integration coming soon...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="settings" class="page">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">⚙️ Settings</span>
+                        </div>
+                        <div class="card-body">
+                            <p style="color: var(--muted-foreground);">Settings panel coming soon...</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="brand">
-                <div class="brand-icon">🦞</div>
-                <div class="brand-text">
-                    <h1>Maverick Mission Control</h1>
-                    <p>AI-Powered Content Pipeline</p>
-                </div>
-            </div>
-            <div class="header-actions">
-                <button class="btn-icon" onclick="toggleTheme()">🌙</button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Tool Navigation -->
-    <nav class="tool-nav">
-        <button class="tool-btn active" onclick="showTool('dashboard')">📊 Dashboard</button>
-        <button class="tool-btn" onclick="showTool('tasks')">✅ Tasks</button>
-        <button class="tool-btn" onclick="showTool('calendar')">📅 Calendar</button>
-        <button class="tool-btn" onclick="showTool('scripts')">📝 Scripts</button>
-        <button class="tool-btn" onclick="showTool('trends')">🔥 Trends</button>
-        <button class="tool-btn" onclick="showTool('docs')">📄 Documents</button>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="main">
-        
-        <!-- DASHBOARD TOOL -->
-        <div id="dashboard" class="tool-panel active">
-            <div class="grid">
-                <!-- Priority Script -->
-                <div class="col-12">
-                    <div class="card" style="background: var(--primary); color: var(--primary-foreground);">
-                        <div class="card-header" style="border-color: rgba(0,0,0,0.1);">
-                            <span class="card-title">🎯 Today's Priority</span>
-                            <span style="font-size: 0.75rem; opacity: 0.8;">Ready to Record</span>
-                        </div>
-                        <div class="card-body">
-                            <h2 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Claude Opus 4.6 vs Sonnet 4.6: Which Actually Wins for Vibe Coding?</h2>
-                            <p style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 1rem;">Complete script with 5 SEO titles, 3 hooks, full comparison. 2,475 words. 8-12 min.</p>
-                            <div style="display: flex; gap: 0.5rem;">
-                                <a href="https://www.notion.so/Claude-Opus-4-6-vs-Sonnet-4-6-Which-Actually-Wins-for-Vibe-Coding-30c9f11a16c1813db428e881bd24ec27" class="btn-icon" style="width: auto; padding: 0.5rem 1rem; text-decoration: none; color: var(--primary); background: var(--primary-foreground);">📄 View in Notion</a>
-                                <a href="tg://resolve?domain=maverickalex_bot" class="btn-icon" style="width: auto; padding: 0.5rem 1rem; text-decoration: none;">✓ Mark Recorded</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quick Stats -->
-                <div class="col-3">
-                    <div class="card">
-                        <div class="card-body" style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">3</div>
-                            <div style="font-size: 0.75rem; color: var(--muted-foreground);">Scripts Ready</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="card">
-                        <div class="card-body" style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">5</div>
-                            <div style="font-size: 0.75rem; color: var(--muted-foreground);">Trends Found</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="card">
-                        <div class="card-body" style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">12</div>
-                            <div style="font-size: 0.75rem; color: var(--muted-foreground);">This Week</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="card">
-                        <div class="card-body" style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">847</div>
-                            <div style="font-size: 0.75rem; color: var(--muted-foreground);">Total Scripts</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recent Activity -->
-                <div class="col-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <span class="card-title">⚡ Recent Agent Activity</span>
-                        </div>
-                        <div class="card-body">
-                            <div class="task-item">
-                                <div class="task-status complete"></div>
-                                <div class="task-name">Research Agent found 5 trending threads</div>
-                                <div class="task-time">6:38 AM</div>
-                            </div>
-                            <div class="task-item">
-                                <div class="task-status complete"></div>
-                                <div class="task-name">Script Agent completed Claude comparison</div>
-                                <div class="task-time">6:36 AM</div>
-                            </div>
-                            <div class="task-item">
-                                <div class="task-status complete"></div>
-                                <div class="task-name">Hook Agent generated 3 viral hooks</div>
-                                <div class="task-time">6:34 AM</div>
-                            </div>
-                            <div class="task-item">
-                                <div class="task-status running"></div>
-                                <div class="task-name">Social Agent drafting Threads posts</div>
-                                <div class="task-time">Now</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- System Status -->
-                <div class="col-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <span class="card-title">🔧 System Status</span>
-                        </div>
-                        <div class="card-body">
-                            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: var(--secondary); border-radius: var(--radius);">
-                                    <span>🔍 Research Agent</span>
-                                    <span style="font-size: 0.75rem; color: #22c55e;">● Active</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: var(--secondary); border-radius: var(--radius);">
-                                    <span>📝 Script Agent</span>
-                                    <span style="font-size: 0.75rem; color: #22c55e;">● Active</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: var(--secondary); border-radius: var(--radius);">
-                                    <span>🎣 Hook Agent</span>
-                                    <span style="font-size: 0.75rem; color: #22c55e;">● Active</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: var(--secondary); border-radius: var(--radius);">
-                                    <span>📱 Social Agent</span>
-                                    <span style="font-size: 0.75rem; color: #f59e0b;">● Working</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TASKS TOOL -->
-        <div id="tasks" class="tool-panel">
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">✅ Autonomous Tasks</span>
-                    <span style="font-size: 0.75rem; color: var(--muted-foreground);">Scheduled by Maverick</span>
-                </div>
-                <div class="card-body">
-                    <div class="task-item">
-                        <div class="task-status complete"></div>
-                        <div class="task-name">🌅 6:00 AM — Research Agent: Check overnight trends</div>
-                        <div class="task-time">Complete</div>
-                    </div>
-                    <div class="task-item">
-                        <div class="task-status complete"></div>
-                        <div class="task-name">📝 8:00 AM — Script Agent: Write Script #1</div>
-                        <div class="task-time">Complete</div>
-                    </div>
-                    <div class="task-item">
-                        <div class="task-status pending"></div>
-                        <div class="task-name">📝 10:00 AM — Script Agent: Write Script #2</div>
-                        <div class="task-time">Scheduled</div>
-                    </div>
-                    <div class="task-item">
-                        <div class="task-status pending"></div>
-                        <div class="task-name">📝 12:00 PM — Script Agent: Write Script #3 + Report</div>
-                        <div class="task-time">Scheduled</div>
-                    </div>
-                    <div class="task-item">
-                        <div class="task-status pending"></div>
-                        <div class="task-name">🔍 2:00 PM — Research Agent: Afternoon trend check</div>
-                        <div class="task-time">Scheduled</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- CALENDAR TOOL -->
-        <div id="calendar" class="tool-panel">
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">📅 Content Calendar</span>
-                    <span style="font-size: 0.75rem; color: var(--muted-foreground);">February 2026</span>
-                </div>
-                <div class="card-body">
-                    <div class="calendar-grid">
-                        <div class="calendar-day"><span class="calendar-day-number">17</span></div>
-                        <div class="calendar-day"><span class="calendar-day-number">18</span></div>
-                        <div class="calendar-day"><span class="calendar-day-number">19</span></div>
-                        <div class="calendar-day has-task">
-                            <span class="calendar-day-number">20</span>
-                            <span class="calendar-day-task">3 scripts</span>
-                        </div>
-                        <div class="calendar-day"><span class="calendar-day-number">21</span></div>
-                        <div class="calendar-day"><span class="calendar-day-number">22</span></div>
-                        <div class="calendar-day"><span class="calendar-day-number">23</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SCRIPTS TOOL -->
-        <div id="scripts" class="tool-panel">
-            <div class="grid">
-                <div class="col-4">
-                    <div class="content-card">
-                        <h4>Claude Opus 4.6 vs Sonnet 4.6</h4>
-                        <p>Complete comparison script with pricing, limitations, honest verdict</p>
-                        <div class="meta">
-                            <span class="badge">Ready</span>
-                            <span class="badge">David Alex</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="content-card">
-                        <h4>FreshBooks Review 2025</h4>
-                        <p>Full walkthrough with 5 SEO titles, 3 hooks, sponsor integration</p>
-                        <div class="meta">
-                            <span class="badge">Recorded</span>
-                            <span class="badge">David Alex</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="content-card">
-                        <h4>Lovable vs Bolt.new</h4>
-                        <p>Vibe coding tool comparison for Vibes Academy</p>
-                        <div class="meta">
-                            <span class="badge">Research</span>
-                            <span class="badge">Vibes Academy</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TRENDS TOOL -->
-        <div id="trends" class="tool-panel">
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">🔥 Threads Trending</span>
-                    <span style="font-size: 0.75rem; color: var(--muted-foreground);">Updated 6:38 AM</span>
-                </div>
-                <div class="card-body">
-                    <div class="task-item">
-                        <div style="font-size: 1.25rem;">📊</div>
-                        <div style="flex: 1;">
-                            <div style="font-weight: 600;">Tailwind Irony</div>
-                            <div style="font-size: 0.75rem; color: var(--muted-foreground);">75% layoffs despite 75M downloads — paradox narrative</div>
-                        </div>
-                        <div style="font-size: 0.75rem; color: var(--primary); font-weight: 600;">372 likes</div>
-                    </div>
-                    
-                    <div class="task-item">
-                        <div style="font-size: 1.25rem;">🚀</div>
-                        <div style="flex: 1;">
-                            <div style="font-weight: 600;">SoftGen $1M Exit</div>
-                            <div style="font-size: 0.75rem; color: var(--muted-foreground);">20yo founder built before Lovable/Bolt hype</div>
-                        </div>
-                        <div style="font-size: 0.75rem; color: var(--primary); font-weight: 600;">500 likes</div>
-                    </div>
-
-                    <div class="task-item">
-                        <div style="font-size: 1.25rem;">🌙</div>
-                        <div style="flex: 1;">
-                            <div style="font-weight: 600;">The 2 AM Test</div>
-                            <div style="font-size: 0.75rem; color: var(--muted-foreground);">"AI won't replace devs. Can you fix it at 2 AM?"</div>
-                        </div>
-                        <div style="font-size: 0.75rem; color: var(--primary); font-weight: 600;">Viral</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- DOCS TOOL -->
-        <div id="docs" class="tool-panel">
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">📄 Documents</span>
-                </div>
-                <div class="card-body" style="padding: 0;">
-                    <div class="doc-item">
-                        <div class="doc-icon">📋</div>
-                        <div class="doc-info">
-                            <div class="doc-name">MISSION_STATEMENT.md</div>
-                            <div class="doc-meta">Updated today</div>
-                        </div>
-                    </div>
-                    
-                    <div class="doc-item">
-                        <div class="doc-icon">🧠</div>
-                        <div class="doc-info">
-                            <div class="doc-name">BRAIN_DUMP.md</div>
-                            <div class="doc-meta">Updated today</div>
-                        </div>
-                    </div>
-                    
-                    <div class="doc-item">
-                        <div class="doc-icon">🔧</div>
-                        <div class="doc-info">
-                            <div class="doc-name">EXPECTATIONS.md</div>
-                            <div class="doc-meta">Updated today</div>
-                        </div>
-                    </div>
-                    
-                    <div class="doc-item">
-                        <div class="doc-icon">📝</div>
-                        <div class="doc-info">
-                            <div class="doc-name">Claude Opus 4.6 vs Sonnet 4.6 Script</div>
-                            <div class="doc-meta">2,475 words • Ready to record</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
     <script>
-        function showTool(toolId) {
-            // Hide all panels
-            document.querySelectorAll('.tool-panel').forEach(panel => {
-                panel.classList.remove('active');
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
             });
             
-            // Remove active from all buttons
-            document.querySelectorAll('.tool-btn').forEach(btn => {
-                btn.classList.remove('active');
+            // Remove active from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
             });
             
-            // Show selected panel
-            document.getElementById(toolId).classList.add('active');
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
             
-            // Add active to clicked button
+            // Add active to clicked nav item
             event.target.classList.add('active');
+            
+            // Update page title
+            const titles = {
+                'dashboard': 'Dashboard',
+                'scripts': 'Scripts',
+                'trends': 'Trends',
+                'calendar': 'Calendar',
+                'tasks': 'Tasks',
+                'agents': 'Agents',
+                'docs': 'Documents',
+                'analytics': 'Analytics',
+                'settings': 'Settings'
+            };
+            document.querySelector('.page-title').textContent = titles[pageId];
         }
         
         function toggleTheme() {
