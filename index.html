@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maverick Mission Control</title>
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #14141f;
+            --bg-tertiary: #1a1a2e;
+            --border: #2d2d44;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --accent: #3b82f6;
+            --accent-secondary: #8b5cf6;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --border: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .brand { display: flex; align-items: center; gap: 1rem; }
+        .brand-icon { font-size: 2rem; }
+        .brand h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .brand p { color: var(--text-secondary); font-size: 0.9rem; }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--success);
+            border-radius: 20px;
+            color: var(--success);
+            font-size: 0.85rem;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            padding: 1.25rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .badge {
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .badge-green { background: rgba(34, 197, 94, 0.1); color: var(--success); }
+        .badge-blue { background: rgba(59, 130, 246, 0.1); color: var(--accent); }
+        .badge-yellow { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+        
+        .card-body { padding: 1.25rem; }
+        
+        .priority-item {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1rem;
+        }
+        
+        .priority-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .priority-meta {
+            display: flex;
+            gap: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            color: white;
+        }
+        
+        .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+        
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-secondary:hover { background: var(--border); }
+        
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+        
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+        
+        .action-btn:hover {
+            border-color: var(--accent);
+            background: var(--border);
+        }
+        
+        .action-btn .icon { font-size: 1.5rem; }
+        .action-btn .text strong { display: block; }
+        .action-btn .text span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .trending-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+        
+        .trending-engagement {
+            text-align: center;
+            min-width: 60px;
+        }
+        
+        .trending-number {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--success);
+        }
+        
+        .trending-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        
+        .trending-content { flex: 1; }
+        .trending-content p {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        .trending-source {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .pipeline {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            overflow-x: auto;
+        }
+        
+        .pipeline-stage {
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 0.75rem;
+            min-width: 140px;
+        }
+        
+        .pipeline-stage h4 {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .pipeline-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        
+        .pipeline-item:hover { border-color: var(--accent); }
+        .pipeline-item .title { font-weight: 500; margin-bottom: 0.25rem; }
+        .pipeline-item .meta { font-size: 0.7rem; color: var(--text-muted); }
+        
+        .count {
+            background: var(--bg-secondary);
+            padding: 0.1rem 0.4rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+        }
+        
+        .status-list { display: flex; flex-direction: column; gap: 0.75rem; }
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+        }
+        .status-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 8px;
+        }
+        .status-info { flex: 1; }
+        .status-name { font-weight: 500; }
+        .status-detail { font-size: 0.8rem; color: var(--text-muted); }
+        
+        .notification {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .footer {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .pipeline { grid-template-columns: repeat(2, 1fr); }
+            .action-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="brand">
+                <span class="brand-icon">🦞</span>
+                <div>
+                    <h1>Maverick Mission Control</h1>
+                    <p>AI-Powered Content Pipeline</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    Live
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="grid">
+            <!-- Priority Script -->
+            <div class="card" style="grid-column: 1 / -1;">
+                <div class="card-header">
+                    <h3 class="card-title">🎯 Today's Priority</h3>
+                    <span class="badge badge-green">Ready to Record</span>
+                </div>
+                <div class="card-body">
+                    <div class="priority-item">
+                        <div class="priority-title">FreshBooks Review 2025: Is It Worth It for Small Business?</div>
+                        <div class="priority-meta">
+                            <span>📺 David Alex</span>
+                            <span>⏱️ 8-12 min</span>
+                            <span>💰 20% off offer</span>
+                        </div>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                            Complete script with 5 SEO titles, 3 hooks, full walkthrough. 
+                            2,847 words. Ready for review.
+                        </p>
+                        <div style="display: flex; gap: 0.75rem;">
+                            <a href="https://www.notion.so/" class="btn btn-primary" target="_blank">📄 View in Notion</a>
+                            <a href="tg://resolve?domain=maverick_alex_bot" class="btn btn-success">✓ Mark Recorded</a>
+                            <a href="tg://resolve?domain=maverick_alex_bot" class="btn btn-secondary">✏️ Request Edit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">⚡ Quick Actions</h3>
+                </div>
+                <div class="card-body">
+                    <div class="action-grid">
+                        <a href="tg://resolve?domain=maverick_alex_bot&text=/check_threads" class="action-btn">
+                            <span class="icon">🔍</span>
+                            <div class="text">
+                                <strong>Check Threads</strong>
+                                <span>Find trending now</span>
+                            </div>
+                        </a>
+                        <a href="tg://resolve?domain=maverick_alex_bot&text=/new_script" class="action-btn">
+                            <span class="icon">📝</span>
+                            <div class="text">
+                                <strong>New Script</strong>
+                                <span>Start from scratch</span>
+                            </div>
+                        </a>
+                        <a href="https://www.notion.so/" class="action-btn" target="_blank">
+                            <span class="icon">📚</span>
+                            <div class="text">
+                                <strong>View Archive</strong>
+                                <span>All past scripts</span>
+                            </div>
+                        </a>
+                        <a href="tg://resolve?domain=maverick_alex_bot&text=/settings" class="action-btn">
+                            <span class="icon">⚙️</span>
+                            <div class="text">
+                                <strong>Settings</strong>
+                                <span>Preferences</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Threads Trending -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">🔥 Threads Trending</h3>
+                    <span class="badge badge-yellow">Updated 2h ago</span>
+                </div>
+                <div class="card-body">
+                    <div class="trending-item">
+                        <div class="trending-engagement">
+                            <div class="trending-number">2.4K</div>
+                            <div class="trending-label">Likes</div>
+                        </div>
+                        <div class="trending-content">
+                            <p>"I built a $10K/month SaaS in 30 days with vibe coding..."</p>
+                            <div class="trending-source">@indiehacker • 847 comments</div>
+                            <div style="margin-top: 0.5rem;">
+                                <a href="tg://resolve?domain=maverick_alex_bot&text=/remake indiehacker-saas" class="btn btn-primary" style="padding: 0.4rem 0.75rem; font-size: 0.8rem;">Remake This</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="trending-item">
+                        <div class="trending-engagement">
+                            <div class="trending-number">3.1K</div>
+                            <div class="trending-label">Likes</div>
+                        </div>
+                        <div class="trending-content">
+                            <p>"Claude 3.7 just changed vibe coding forever..."</p>
+                            <div class="trending-source">@aideveloper • 567 comments</div>
+                            <div style="margin-top: 0.5rem;">
+                                <a href="tg://resolve?domain=maverick_alex_bot&text=/remake claude-37" class="btn btn-primary" style="padding: 0.4rem 0.75rem; font-size: 0.8rem;">Remake This</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pipeline -->
+            <div class="card" style="grid-column: 1 / -1;">
+                <div class="card-header">
+                    <h3 class="card-title">📋 Content Pipeline</h3>
+                    <span class="badge badge-blue">Live</span>
+                </div>
+                <div class="card-body">
+                    <div class="pipeline">
+                        <div class="pipeline-stage">
+                            <h4>To Research <span class="count">2</span></h4>
+                            <div class="pipeline-item">
+                                <div class="title">Lovable vs Bolt</div>
+                                <div class="meta">Vibes Academy</div>
+                            </div>
+                        </div>
+                        <div class="pipeline-stage">
+                            <h4>Writing <span class="count">1</span></h4>
+                            <div class="pipeline-item">
+                                <div class="title">Replit Agent</div>
+                                <div class="meta">80% complete</div>
+                            </div>
+                        </div>
+                        <div class="pipeline-stage">
+                            <h4>Ready <span class="count">3</span></h4>
+                            <div class="pipeline-item">
+                                <div class="title">FreshBooks</div>
+                                <div class="meta">David Alex</div>
+                            </div>
+                        </div>
+                        <div class="pipeline-stage">
+                            <h4>Approved <span class="count">1</span></h4>
+                            <div class="pipeline-item">
+                                <div class="title">AI Tools 2025</div>
+                                <div class="meta">Ready to record</div>
+                            </div>
+                        </div>
+                        <div class="pipeline-stage">
+                            <h4>Recorded <span class="count">5</span></h4>
+                            <div class="pipeline-item">
+                                <div class="title">Vibe Coding Basics</div>
+                                <div class="meta">Feb 19</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Status -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">🔧 System Status</h3>
+                    <span class="badge badge-green">Healthy</span>
+                </div>
+                <div class="card-body">
+                    <div class="status-list">
+                        <div class="status-item">
+                            <div class="status-icon">💬</div>
+                            <div class="status-info">
+                                <div class="status-name">Telegram Bot</div>
+                                <div class="status-detail">Connected • Last ping: 2m ago</div>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-icon">📝</div>
+                            <div class="status-info">
+                                <div class="status-name">Notion Integration</div>
+                                <div class="status-detail">Active • Scripts syncing</div>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-icon">🔥</div>
+                            <div class="status-info">
+                                <div class="status-name">Threads Monitor</div>
+                                <div class="status-detail">Running • Next check: 8:00 AM</div>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-icon">⏰</div>
+                            <div class="status-info">
+                                <div class="status-name">Cron Jobs</div>
+                                <div class="status-detail">3 scheduled • All firing</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Last updated: February 20, 2026 at 5:55 AM PST</p>
+            <p style="margin-top: 0.5rem;">Next Threads check: 8:00 AM PST • Next script delivery: 8:00 AM PST</p>
+        </footer>
+    </main>
+
+    <script>
+        // Theme toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            document.querySelector('.theme-toggle').textContent = next === 'light' ? '☀️' : '🌙';
+        }
+        
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.querySelector('.theme-toggle').textContent = savedTheme === 'light' ? '☀️' : '🌙';
+    </script>
+</body>
+</html>
