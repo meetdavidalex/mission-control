@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,9 +20,25 @@
             --danger: #c97b7b;
             --info: #7a9dc9;
         }
-        
+
+        [data-theme="light"] {
+            --bg-primary: #fafafa;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f5f5f5;
+            --border: #e5e5e5;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-muted: #999999;
+            --accent: #8b6914;
+            --accent-hover: #6b5110;
+            --success: #4a7c48;
+            --warning: #8b6914;
+            --danger: #a85d5d;
+            --info: #5a7da8;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--bg-primary);
@@ -31,7 +47,7 @@
             min-height: 100vh;
             font-size: 14px;
         }
-        
+
         .header {
             background: var(--bg-secondary);
             border-bottom: 1px solid var(--border);
@@ -40,7 +56,7 @@
             top: 0;
             z-index: 100;
         }
-        
+
         .header-content {
             max-width: 1400px;
             margin: 0 auto;
@@ -48,7 +64,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .brand { display: flex; align-items: center; gap: 0.875rem; }
         .brand-icon { font-size: 1.75rem; }
         .brand h1 {
@@ -57,18 +73,38 @@
             letter-spacing: -0.02em;
             color: var(--text-primary);
         }
-        .brand p { 
-            color: var(--text-secondary); 
+        .brand p {
+            color: var(--text-secondary);
             font-size: 0.8125rem;
             margin-top: 0.125rem;
         }
-        
+
         .header-actions {
             display: flex;
             align-items: center;
             gap: 0.75rem;
         }
-        
+
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
         .status-badge {
             display: flex;
             align-items: center;
@@ -81,7 +117,7 @@
             font-size: 0.8125rem;
             font-weight: 500;
         }
-        
+
         .status-dot {
             width: 6px;
             height: 6px;
@@ -89,31 +125,31 @@
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
-        
+
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.4; }
         }
-        
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 1.5rem 2rem;
         }
-        
+
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
             gap: 1rem;
         }
-        
+
         .card {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-radius: 8px;
             overflow: hidden;
         }
-        
+
         .card-header {
             padding: 1rem 1.25rem;
             border-bottom: 1px solid var(--border);
@@ -121,7 +157,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .card-title {
             font-size: 0.9375rem;
             font-weight: 600;
@@ -130,7 +166,7 @@
             gap: 0.5rem;
             color: var(--text-primary);
         }
-        
+
         .badge {
             padding: 0.25rem 0.625rem;
             border-radius: 4px;
@@ -138,21 +174,21 @@
             font-weight: 500;
             border: 1px solid;
         }
-        
+
         .badge-green { background: transparent; color: var(--success); border-color: var(--success); }
         .badge-blue { background: transparent; color: var(--accent); border-color: var(--accent); }
         .badge-yellow { background: transparent; color: var(--warning); border-color: var(--warning); }
         .badge-red { background: transparent; color: var(--danger); border-color: var(--danger); }
-        
+
         .card-body { padding: 1.25rem; }
-        
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1rem;
             margin-bottom: 1.5rem;
         }
-        
+
         .stat-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
@@ -160,21 +196,21 @@
             padding: 1rem;
             text-align: center;
         }
-        
+
         .stat-number {
             font-size: 1.75rem;
             font-weight: 600;
             color: var(--accent);
             margin-bottom: 0.25rem;
         }
-        
+
         .stat-label {
             font-size: 0.75rem;
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
-        
+
         .priority-item {
             background: var(--bg-tertiary);
             border: 1px solid var(--border);
@@ -183,14 +219,14 @@
             border-radius: 6px;
             margin-bottom: 0.75rem;
         }
-        
+
         .priority-title {
             font-size: 1rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
             color: var(--text-primary);
         }
-        
+
         .priority-meta {
             display: flex;
             gap: 1rem;
@@ -199,7 +235,7 @@
             margin-bottom: 0.75rem;
             flex-wrap: wrap;
         }
-        
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -213,23 +249,23 @@
             text-decoration: none;
             font-size: 0.8125rem;
         }
-        
+
         .btn-primary {
             background: var(--accent);
             border-color: var(--accent);
             color: var(--bg-primary);
         }
-        
+
         .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
-        
+
         .btn-secondary {
             background: transparent;
             border-color: var(--border);
             color: var(--text-secondary);
         }
-        
+
         .btn-secondary:hover { border-color: var(--text-secondary); color: var(--text-primary); }
-        
+
         .agent-card {
             background: var(--bg-tertiary);
             border: 1px solid var(--border);
@@ -237,14 +273,14 @@
             padding: 1rem;
             margin-bottom: 0.75rem;
         }
-        
+
         .agent-header {
             display: flex;
             align-items: center;
             gap: 0.75rem;
             margin-bottom: 0.5rem;
         }
-        
+
         .agent-icon {
             width: 36px;
             height: 36px;
@@ -256,12 +292,12 @@
             border-radius: 6px;
             font-size: 1.25rem;
         }
-        
+
         .agent-name {
             font-weight: 600;
             font-size: 0.9375rem;
         }
-        
+
         .agent-status {
             font-size: 0.75rem;
             color: var(--success);
@@ -269,25 +305,25 @@
             align-items: center;
             gap: 0.25rem;
         }
-        
+
         .agent-desc {
             font-size: 0.8125rem;
             color: var(--text-secondary);
             margin-bottom: 0.5rem;
         }
-        
+
         .agent-schedule {
             font-size: 0.75rem;
             color: var(--text-muted);
             font-family: monospace;
         }
-        
+
         .script-list {
             display: flex;
             flex-direction: column;
             gap: 0.625rem;
         }
-        
+
         .script-item {
             display: flex;
             align-items: center;
@@ -300,9 +336,9 @@
             color: var(--text-primary);
             transition: all 0.15s;
         }
-        
+
         .script-item:hover { border-color: var(--accent); }
-        
+
         .script-channel {
             width: 32px;
             height: 32px;
@@ -314,11 +350,11 @@
             border-radius: 6px;
             font-size: 1rem;
         }
-        
+
         .script-info { flex: 1; }
         .script-title { font-weight: 500; font-size: 0.875rem; margin-bottom: 0.125rem; }
         .script-meta { font-size: 0.75rem; color: var(--text-muted); }
-        
+
         .script-status {
             padding: 0.25rem 0.5rem;
             border-radius: 4px;
@@ -327,17 +363,17 @@
             text-transform: uppercase;
             letter-spacing: 0.03em;
         }
-        
+
         .status-ready { background: rgba(124, 185, 122, 0.1); color: var(--success); border: 1px solid var(--success); }
         .status-progress { background: rgba(212, 165, 116, 0.1); color: var(--warning); border: 1px solid var(--warning); }
-        
+
         .pipeline {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             gap: 0.5rem;
             overflow-x: auto;
         }
-        
+
         .pipeline-stage {
             background: var(--bg-tertiary);
             border: 1px solid var(--border);
@@ -345,7 +381,7 @@
             padding: 0.75rem;
             min-width: 130px;
         }
-        
+
         .pipeline-stage h4 {
             font-size: 0.6875rem;
             color: var(--text-secondary);
@@ -356,7 +392,7 @@
             justify-content: space-between;
             font-weight: 500;
         }
-        
+
         .pipeline-item {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
@@ -365,10 +401,10 @@
             margin-bottom: 0.375rem;
             font-size: 0.75rem;
         }
-        
+
         .pipeline-item .title { font-weight: 500; margin-bottom: 0.125rem; color: var(--text-primary); }
         .pipeline-item .meta { font-size: 0.6875rem; color: var(--text-muted); }
-        
+
         .count {
             background: var(--bg-secondary);
             padding: 0.125rem 0.375rem;
@@ -376,7 +412,7 @@
             font-size: 0.6875rem;
             border: 1px solid var(--border);
         }
-        
+
         .trending-item {
             display: flex;
             gap: 0.875rem;
@@ -386,25 +422,25 @@
             border-radius: 6px;
             margin-bottom: 0.625rem;
         }
-        
+
         .trending-engagement {
             text-align: center;
             min-width: 50px;
         }
-        
+
         .trending-number {
             font-size: 1.125rem;
             font-weight: 600;
             color: var(--success);
         }
-        
+
         .trending-label {
             font-size: 0.625rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
-        
+
         .trending-content { flex: 1; }
         .trending-content p {
             font-size: 0.875rem;
@@ -415,7 +451,40 @@
             font-size: 0.75rem;
             color: var(--text-muted);
         }
-        
+
+        .news-item {
+            display: flex;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-source {
+            font-size: 0.6875rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            min-width: 60px;
+        }
+
+        .news-content {
+            flex: 1;
+        }
+
+        .news-title {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .news-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
         .debug-log {
             background: var(--bg-tertiary);
             border: 1px solid var(--border);
@@ -427,23 +496,23 @@
             max-height: 200px;
             overflow-y: auto;
         }
-        
+
         .debug-entry {
             margin-bottom: 0.5rem;
             padding-bottom: 0.5rem;
             border-bottom: 1px solid var(--border);
         }
-        
+
         .debug-entry:last-child {
             margin-bottom: 0;
             padding-bottom: 0;
             border-bottom: none;
         }
-        
+
         .debug-time {
             color: var(--accent);
         }
-        
+
         .footer {
             margin-top: 2rem;
             padding: 1.25rem;
@@ -452,7 +521,7 @@
             font-size: 0.8125rem;
             border-top: 1px solid var(--border);
         }
-        
+
         @media (max-width: 768px) {
             .grid { grid-template-columns: 1fr; }
             .pipeline { grid-template-columns: repeat(3, 1fr); }
@@ -471,6 +540,7 @@
                 </div>
             </div>
             <div class="header-actions">
+                <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">🌙</button>
                 <div class="status-badge">
                     <span class="status-dot"></span>
                     Live
@@ -491,7 +561,7 @@
                 <div class="stat-label">Total Scripts</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">6</div>
+                <div class="stat-number">7</div>
                 <div class="stat-label">Agents Active</div>
             </div>
             <div class="stat-card">
@@ -501,6 +571,90 @@
         </div>
 
         <div class="grid">
+            <!-- Live Trends & News -->
+            <div class="card" style="grid-column: 1 / -1;">
+                <div class="card-header">
+                    <h3 class="card-title">🔥 Live Trends & AI News</h3>
+                    <span class="badge badge-yellow" id="trend-date">Loading...</span>
+                </div>
+                <div class="card-body">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                        <div>
+                            <h4 style="font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">🔥 Threads/YouTube Trends</h4>
+                            
+                            <div class="trending-item">
+                                <div class="trending-engagement">
+                                    <div class="trending-number">🚨</div>
+                                    <div class="trending-label">Breaking</div>
+                                </div>
+                                <div class="trending-content">
+                                    <p>US AI Giants accuse Chinese rivals of mass data theft</p>
+                                    <div class="trending-source">Anthropic statement • Today</div>
+                                </div>
+                            </div>
+                            
+                            <div class="trending-item">
+                                <div class="trending-engagement">
+                                    <div class="trending-number">#1</div>
+                                    <div class="trending-label">Ranked</div>
+                                </div>
+                                <div class="trending-content">
+                                    <p>Claude Opus 4.6 overtakes Gemini for professional work</p>
+                                    <div class="trending-source">Terminal-Bench 2.0 • Today</div>
+                                </div>
+                            </div>
+                            
+                            <div class="trending-item">
+                                <div class="trending-engagement">
+                                    <div class="trending-number">💰</div>
+                                    <div class="trending-label">Money</div>
+                                </div>
+                                <div class="trending-content">
+                                    <p>AI PAC ad blitz — Anthropic lobbying for regulation</p>
+                                    <div class="trending-source">Super PAC • Today</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 style="font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">📰 Latest AI News</h4>
+                            
+                            <div class="news-item">
+                                <div class="news-source">Anthropic</div>
+                                <div class="news-content">
+                                    <div class="news-title">Claude Opus 4.6 now #1 for professional tasks</div>
+                                    <div class="news-meta">Beats GPT-5.2 by 144 Elo points • 2h ago</div>
+                                </div>
+                            </div>
+                            
+                            <div class="news-item">
+                                <div class="news-source">OpenAI</div>
+                                <div class="news-content">
+                                    <div class="news-title">Hired Peter Steinberger (OpenClaw creator)</div>
+                                    <div class="news-meta">175K+ GitHub stars • 1d ago</div>
+                                </div>
+                            </div>
+                            
+                            <div class="news-item">
+                                <div class="news-source">Meta</div>
+                                <div class="news-content">
+                                    <div class="news-title">"Dear Algo" AI personalization launched</div>
+                                    <div class="news-meta">Threads evolution • Feb 11</div>
+                                </div>
+                            </div>
+                            
+                            <div class="news-item">
+                                <div class="news-source">DeepSeek</div>
+                                <div class="news-content">
+                                    <div class="news-title">Disrupting Hollywood/tech with cheaper models</div>
+                                    <div class="news-meta">China AI competition • 3d ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Ready to Record -->
             <div class="card" style="grid-column: 1 / -1;">
                 <div class="card-header">
@@ -549,10 +703,10 @@
                 </div>
             </div>
 
-            <!-- 6 Agents -->
+            <!-- 7 Agents -->
             <div class="card" style="grid-column: 1 / -1;">
                 <div class="card-header">
-                    <h3 class="card-title">🤖 6 Agents</h3>
+                    <h3 class="card-title">🤖 7 Agents</h3>
                     <span class="badge badge-blue">Active</span>
                 </div>
                 <div class="card-body">
@@ -627,6 +781,18 @@
                             </div>
                             <div class="agent-desc">Creates companion content. Threads posts, LinkedIn, newsletter snippets.</div>
                             <div class="agent-schedule">When script approved</div>
+                        </div>
+
+                        <div class="agent-card">
+                            <div class="agent-header">
+                                <div class="agent-icon">📰</div>
+                                <div>
+                                    <div class="agent-name">News Agent</div>
+                                    <div class="agent-status"><span class="status-dot"></span> NEW</div>
+                                </div>
+                            </div>
+                            <div class="agent-desc">Stays on top of AI news. Watches Anthropic, OpenAI, X, Threads, Product Hunt.</div>
+                            <div class="agent-schedule">Every 4 hours + breaking news</div>
                         </div>
                     </div>
                 </div>
@@ -753,46 +919,6 @@
                 </div>
             </div>
 
-            <!-- Today's Trends (Live) -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">🔥 Live Trends</h3>
-                    <span class="badge badge-yellow" id="trend-date">Loading...</span>
-                </div>
-                <div class="card-body">
-                    <div class="trending-item">
-                        <div class="trending-engagement">
-                            <div class="trending-number">🚨</div>
-                            <div class="trending-label">Breaking</div>
-                        </div>
-                        <div class="trending-content">
-                            <p>US AI Giants accuse Chinese rivals of mass data theft</p>
-                            <div class="trending-source">Anthropic public statement • Today</div>
-                        </div>
-                    </div>
-                    <div class="trending-item">
-                        <div class="trending-engagement">
-                            <div class="trending-number">#1</div>
-                            <div class="trending-label">Ranked</div>
-                        </div>
-                        <div class="trending-content">
-                            <p>Claude Opus 4.6 overtakes Gemini for professional work</p>
-                            <div class="trending-source">Terminal-Bench 2.0: 65.4% • Today</div>
-                        </div>
-                    </div>
-                    <div class="trending-item">
-                        <div class="trending-engagement">
-                            <div class="trending-number">💰</div>
-                            <div class="trending-label">Money</div>
-                        </div>
-                        <div class="trending-content">
-                            <p>AI PAC ad blitz launches — Anthropic lobbying for regulation</div>
-                            <div class="trending-source">Super PAC campaigns • Today</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Debug Monitor -->
             <div class="card" style="grid-column: 1 / -1;">
                 <div class="card-header">
@@ -802,19 +928,19 @@
                 <div class="card-body">
                     <div class="debug-log" id="debug-log">
                         <div class="debug-entry">
+                            <span class="debug-time">[2026-02-24 12:00 PST]</span> Added News Agent (7th agent)
+                        </div>
+                        <div class="debug-entry">
+                            <span class="debug-time">[2026-02-24 11:58 PST]</span> Moved trends to top, added light/dark mode
+                        </div>
+                        <div class="debug-entry">
                             <span class="debug-time">[2026-02-24 11:45 PST]</span> Dashboard deployed to GitHub Pages
                         </div>
                         <div class="debug-entry">
-                            <span class="debug-time">[2026-02-24 11:42 PST]</span> Updated: 33 total scripts, 3 ready to record
+                            <span class="debug-time">[2026-02-24 11:42 PST]</span> Fixed stats: 33 total scripts, 3 ready
                         </div>
                         <div class="debug-entry">
                             <span class="debug-time">[2026-02-24 11:40 PST]</span> Fixed cron job delivery (all 5 updated)
-                        </div>
-                        <div class="debug-entry">
-                            <span class="debug-time">[2026-02-24 11:38 PST]</span> Added 6 agent cards with schedules
-                        </div>
-                        <div class="debug-entry">
-                            <span class="debug-time">[2026-02-24 11:36 PST]> Connected GitHub PAT for auto-deploy
                         </div>
                     </div>
                 </div>
@@ -822,20 +948,33 @@
         </div>
 
         <footer class="footer">
-            <p><strong>6 Agents Active</strong> — Orchestrator, Research, Script, Hook, Review, Social</p>
-            <p style="margin-top: 0.5rem;">Schedule: 6AM Research → 8AM Script #1 → 10AM Script #2 → 12PM Script #3 + Report → 2PM Check</p>
+            <p><strong>7 Agents Active</strong> — Orchestrator, Research, Script, Hook, Review, Social, News</p>
+            <p style="margin-top: 0.5rem;">Schedule: 6AM Research → 8AM Script #1 → 10AM Script #2 → 12PM Script #3 + Report → 2PM Check → 4H News</p>
             <p style="margin-top: 0.25rem; color: var(--text-muted);">Last updated: <span id="footer-date"></span></p>
         </footer>
     </main>
 
     <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            document.querySelector('.theme-toggle').textContent = next === 'light' ? '☀️' : '🌙';
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.querySelector('.theme-toggle').textContent = savedTheme === 'light' ? '☀️' : '🌙';
+
         // Live date
         const now = new Date();
-        const dateStr = now.toLocaleDateString('en-US', { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
+        const dateStr = now.toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
         });
         document.getElementById('trend-date').textContent = dateStr;
         document.getElementById('footer-date').textContent = now.toISOString().split('T')[0];
